@@ -59,11 +59,14 @@
 </template>
 <script>
 import axios from 'axios'
+import { computed, onMounted } from 'vue'
+import {useStore} from 'vuex'
+//import {mapGetters} from 'vuex'
 export default {
     data(){
         return{
             isOpen:false,
-            user:false
+            user1:false
         }
     },
     methods:{
@@ -76,23 +79,36 @@ export default {
             axios.post(direccion,{"hola":"hola"},{headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(data =>{
                 console.log(data);
             });
-            localStorage.token=null;
-            localStorage.name=null;
-            localStorage.id=null;
+            localStorage.removeItem('token');
+            localStorage.removeItem('name');
+            localStorage.removeItem('id');
+            this.$store.dispatch('user', null);
             console.log("si ingresa al metodo de singotu");
-            this.user=false
         }
-    },
+    },/*
     created(){
         let direccion = "http://localhost:8000/api/verificar";
         axios.get(direccion,{headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(data =>{
             if(data.data.res == true){
-                this.user = true
+                this.user1 = true
             }else{
-                this.user = false
+                this.user1 = false
             }
         });
 
+    },/*
+    components:{
+        ...mapGetters(['user'])
+    }*/
+    setup(){
+        const store = useStore()
+        onMounted(() =>{
+            store.dispatch('user')
+        })
+
+        const user = computed(()=>store.state.user)
+
+        return{user}
     }
 }
 </script>

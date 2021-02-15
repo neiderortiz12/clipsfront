@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import NewClip from '@/views/NewClip.vue'
+import Dashboard from '@/views/Dashboard.vue'
 
 const routes = [
   {
@@ -24,7 +25,13 @@ const routes = [
     path: '/newclip',
     name: 'NewClip',
     component: NewClip
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
   }
+
     //component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
 ]
 

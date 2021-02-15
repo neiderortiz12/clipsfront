@@ -61,6 +61,7 @@ export default {
           localStorage.token = data.data.token;
           localStorage.name = data.data.name;
           localStorage.id = data.data.id;
+          this.$store.dispatch('user', data.data)
           console.log("todo correcto");
           this.$router.push('dashboard');
         }else{
