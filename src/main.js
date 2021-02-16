@@ -7,10 +7,10 @@ import store from './store'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
+
 const app = createApp(App)
 app.use(router)
-app.use(VueAxios)
-app.use(axios)
+app.use(VueAxios, axios)
 app.use(store)
 app.mount('#app')
 

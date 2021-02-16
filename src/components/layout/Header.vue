@@ -15,11 +15,15 @@
         <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active':isOpen}">
             <div class="navbar-start">
             <router-link class="navbar-item" to="/">
-                home
+                Inicio
             </router-link>
 
-            <router-link class="navbar-item" to="/">
-                Documentation
+            <router-link v-if="user" class="navbar-item" to="/newclip">
+                Nuevo Clip
+            </router-link>
+
+            <router-link class="navbar-item" to="/about">
+                Nosotros
             </router-link>
 
             </div>
@@ -29,20 +33,20 @@
                     <template v-if="user">
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link">
-                                Usuario
+                                {{user.name}}
                             </a>
 
                             <div class="navbar-dropdown">
-                                <a class="navbar-item">
+                                <router-link class="navbar-item" to="/dashboard">
                                     Dashboard
-                                </a>
-                                <a class="navbar-item" @click.prevent="logOut()">
+                                </router-link>
+                                <router-link class="navbar-item" @click="comprar" to="/login" >
                                     Cerrar Sesion
-                                </a>
+                                </router-link>
                             </div>
                         </div> 
                     </template>
-                    <template v-else>
+                    <template v-if="!user">
                         <div class="buttons">
                             <router-link class="button is-primary" to="/register">
                                 <strong>Registrarse</strong>
@@ -57,16 +61,16 @@
         </div>
     </nav>
 </template>
+
 <script>
 import axios from 'axios'
-import { computed, onMounted } from 'vue'
-import {useStore} from 'vuex'
-//import {mapGetters} from 'vuex'
-export default {
+import { useStore } from 'vuex'
+import { computed } from 'vue'//onMounted, 
+ export default {
     data(){
         return{
             isOpen:false,
-            user1:false
+            user1:true
         }
     },
     methods:{
@@ -82,8 +86,9 @@ export default {
             localStorage.removeItem('token');
             localStorage.removeItem('name');
             localStorage.removeItem('id');
-            this.$store.dispatch('user', null);
             console.log("si ingresa al metodo de singotu");
+            this.user1=null
+            this.$router.push('login');
         }
     },/*
     created(){
@@ -96,19 +101,22 @@ export default {
             }
         });
 
-    },/*
-    components:{
-        ...mapGetters(['user'])
     }*/
     setup(){
         const store = useStore()
-        onMounted(() =>{
-            store.dispatch('user')
-        })
 
         const user = computed(()=>store.state.user)
 
-        return{user}
+        
+        console.log(user)
+        
+        const comprar = ()=> {
+            console.log("entrada al eliminar")
+            store.dispatch('eliminarusuario')
+        }
+        console.log("entrada normal")
+        return{user, comprar}
     }
+
 }
 </script>

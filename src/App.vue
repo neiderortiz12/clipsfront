@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <div id="space">
+  <div id="app" class="container">
+    <div id="space" >
       <Header />
       <div>
         <router-view/>  
@@ -14,10 +14,18 @@
 <script>
 import Header from '@/components/layout/Header.vue'
 import Footer from '@/components/layout/Footer.vue'
+import { useStore } from 'vuex'
+import { computed} from 'vue'
 export default {
   components:{
     Header,
     Footer
+  },
+  setup(){
+    const store = useStore()
+    const user = computed(()=>store.state.user)
+    
+    return{user}
   }
 }
 </script>
@@ -32,6 +40,7 @@ export default {
   #space{
     min-height: calc(100% - 200px);
   }
+
   
   
 </style>

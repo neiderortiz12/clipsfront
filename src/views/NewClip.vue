@@ -1,29 +1,32 @@
 <template>
     <div>
-        <div class="container">
+        <p class="panel-heading">
+            Agregar Nuevo Clip
+        </p>
+        <div class="field">
             <form ction="" v-on:submit.prevent="createNewClip();"  enctype="multipart/form-data">
                 <div >
-                    <label for="" >Nombre</label>
-                    <div >
-                        <input type="text" name="nombre" id="nombre" v-model="form.nombre">
+                    <label for="" class="label" >Nombre</label>
+                    <div class="control">
+                        <input class="input" type="text" name="nombre" id="nombre" v-model="form.nombre" placeholder="Nombre del Nuevo Clip">
                     </div>
                 </div>
                 <div >
-                        <label for="" >clip</label>
-                        <div >
-                            <input type="file" @change="processFile($event)" >
-                        </div>
+                    <label for="" class="label" >Seleccione un Clip</label>
+                    <div >
+                        <input class="input" type="file" @change="processFile($event)" >
+                    </div>
                 </div>
                 <div >
-                        <label for="" >descripcion</label>
-                        <div >
-                            <input type="text" name="descripcion" id="descripcion" v-model="form.descripcion">
-                        </div>
+                    <label for="" class="label" >Descripción</label>
+                    <div class="control">
+                        <textarea class="input" name="descripcion" id="descripcion" v-model="form.descripcion" placeholder="Agregar Una Descripción"></textarea>
+                    </div>
                 </div>
                 <div >
-                        <div >
-                            <input type="submit" value="Crear">
-                        </div>
+                    <div class="control">
+                        <input class="button is-primary" type="submit" value="Crear">
+                    </div>
                 </div>
             </form>
         </div>
@@ -31,6 +34,7 @@
 </template>
 <script>
 import axios from 'axios'
+
 export default {
     name:'NewClip',
     data(){
@@ -55,6 +59,7 @@ export default {
             fr.append('clip', this.clip);
             fr.append('nombre', this.form.nombre);
             fr.append('descripcion', this.form.descripcion);
+            fr.append('user', localStorage.getItem('id')); 
             console.log(fr);
             axios.post('http://localhost:8000/api/clips/create', fr, {headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(res=>{
                 console.log(res);
@@ -65,3 +70,19 @@ export default {
 }
 
 </script>
+<style scoped>
+    .field{
+        max-width: 400px;
+        margin: auto;
+    }
+    .label{
+        margin-top: 20px;
+    }
+    .button{
+        margin-top:20px;
+        margin-bottom: 20px ;
+        width:100%;
+        
+    }
+    
+</style>

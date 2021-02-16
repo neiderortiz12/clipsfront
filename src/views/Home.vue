@@ -6,17 +6,19 @@
             <source :src="'http://localhost/apiclips' + clips.clip" type="video/mp4">
         </video>
       </div>
-      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed, ref, onMounted} from 'vue'
 import axios from "axios";
 export default {
   name: 'Home',
   data() {
     return {
-      ListaClips: null,
+      //ListaClips: null,
       micasa:false,
       numerito:0        
     };
@@ -38,7 +40,7 @@ export default {
     /*repro() {
         document.getElementsByTagName("video")[0].setAttribute("controls","true");
     },*/
-  },
+  },/*
   mounted: function () {
     let direccion = "http://localhost:8000/api/clips";
     /*axios.get({ url:direccion,
@@ -46,12 +48,29 @@ export default {
             Authorization:'Bearer '+localStorage.getItem('token')
         }
         this.ListaClips=data.data;
-    });*/
+    });
     axios.get(direccion,{headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(data =>{
         console.log(data);
         this.ListaClips= data.data;
-    });
-  },
+    });*/
+    setup(){
+      let ListaClips=ref([]);
+      let direccion = "http://localhost:8000/api/clips";
+      axios.get(direccion,{headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(data =>{
+        console.log(data);
+        ListaClips.value= data.data;
+      });
+  
+      const store = useStore()
+        onMounted(() =>{
+            store.dispatch('agregaruser')
+            console.log("entron a mounted")
+        })
+      const user = computed(()=>store.state.user)
+    
+      return{user, ListaClips}
+    }
+
 }
 </script>
 
@@ -77,6 +96,7 @@ export default {
 
 .dash div:hover{
     transform: scale(1.1);
+    z-index: 1;
 
 }
 .dash div {
