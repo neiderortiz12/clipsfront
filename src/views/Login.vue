@@ -34,6 +34,8 @@
 <script>
 // @ is an alias to /src
 import axios from 'axios';
+import { useStore } from 'vuex'
+//import {onMounted} from 'vue' 
 
 export default {
   name: 'Home',
@@ -61,6 +63,8 @@ export default {
           localStorage.token = data.data.token;
           localStorage.name = data.data.name;
           localStorage.id = data.data.id;
+          this.comprar()
+          //this.$store.dispatch('user', data.data)
           console.log("todo correcto");
           this.$router.push('dashboard');
         }else{
@@ -70,7 +74,20 @@ export default {
       })
     }
     
-  }
+  },
+  setup(){
+        const store = useStore()
+        
+        const comprar = () => {
+            store.dispatch('agregaruser')
+            console.log("si paso a al anidado")
+          }
+            
+          console.log("si paso a sutup")
+            //console.log(producto)
+        
+        return {comprar}
+    }
 
 }
 </script>

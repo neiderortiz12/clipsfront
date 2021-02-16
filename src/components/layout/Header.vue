@@ -15,11 +15,11 @@
         <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active':isOpen}">
             <div class="navbar-start">
             <router-link class="navbar-item" to="/">
-                home
+                Inicio
             </router-link>
 
             <router-link class="navbar-item" to="/">
-                Documentation
+                Nosotros
             </router-link>
 
             </div>
@@ -29,20 +29,20 @@
                     <template v-if="user">
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link">
-                                Usuario
+                                {{user.name}}
                             </a>
 
                             <div class="navbar-dropdown">
-                                <a class="navbar-item">
+                                <router-link class="navbar-item" to="/dashboard">
                                     Dashboard
-                                </a>
-                                <a class="navbar-item" @click.prevent="logOut()">
+                                </router-link>
+                                <router-link class="navbar-item" @click="comprar" to="/login" >
                                     Cerrar Sesion
-                                </a>
+                                </router-link>
                             </div>
                         </div> 
                     </template>
-                    <template v-else>
+                    <template v-if="!user">
                         <div class="buttons">
                             <router-link class="button is-primary" to="/register">
                                 <strong>Registrarse</strong>
@@ -57,13 +57,16 @@
         </div>
     </nav>
 </template>
+
 <script>
 import axios from 'axios'
-export default {
+import { useStore } from 'vuex'
+import { computed } from 'vue'//onMounted, 
+ export default {
     data(){
         return{
             isOpen:false,
-            user:false
+            user1:true
         }
     },
     methods:{
@@ -76,13 +79,14 @@ export default {
             axios.post(direccion,{"hola":"hola"},{headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(data =>{
                 console.log(data);
             });
-            localStorage.token=null;
-            localStorage.name=null;
-            localStorage.id=null;
+            localStorage.removeItem('token');
+            localStorage.removeItem('name');
+            localStorage.removeItem('id');
             console.log("si ingresa al metodo de singotu");
-            this.user=false
+            this.user1=null
+            this.$router.push('login');
         }
-    },
+    },/*
     created(){
         let direccion = "http://localhost:8000/api/verificar";
         axios.get(direccion,{headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(data =>{
@@ -93,6 +97,22 @@ export default {
             }
         });
 
+    }*/
+    setup(){
+        const store = useStore()
+
+        const user = computed(()=>store.state.user)
+
+        
+        console.log(user)
+        
+        const comprar = ()=> {
+            console.log("entrada al eliminar")
+            store.dispatch('eliminarusuario')
+        }
+        console.log("entrada normal")
+        return{user, comprar}
     }
+
 }
 </script>
