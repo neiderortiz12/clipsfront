@@ -96,6 +96,7 @@ export default {
 
 .dash div:hover{
     transform: scale(1.1);
+    z-index: 1;
 
 }
 .dash div {

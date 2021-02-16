@@ -18,7 +18,11 @@
                 Inicio
             </router-link>
 
-            <router-link class="navbar-item" to="/">
+            <router-link v-if="user" class="navbar-item" to="/newclip">
+                Nuevo Clip
+            </router-link>
+
+            <router-link class="navbar-item" to="/about">
                 Nosotros
             </router-link>
 

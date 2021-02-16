@@ -40,6 +40,7 @@ export default {
   #space{
     min-height: calc(100% - 200px);
   }
+
   
   
 </style>
