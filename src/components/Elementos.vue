@@ -1,9 +1,10 @@
 <template>
     <div class="contenedor">
+        <h4><strong>Mis clips</strong></h4>
         <div class="contenedor-item" v-for="clips in ListaClips.clips" :key="clips.id">
             <div class="contenedor-item-video">
                 <video v-on:mouseover="mousehover(clips.id)" v-on:mouseleave="mouseleave"  class="vide" v-bind:controls="clips.id==numerito" ref="video">
-                    <source :src="'http://localhost/apiclips' + clips.clip" type="video/mp4">
+                    <source :src="'http://localhost/clips' + clips.clip" type="video/mp4">
                 </video>
             </div>
             <div class="contenedor-item-opciones">

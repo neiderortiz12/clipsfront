@@ -3,7 +3,7 @@
     <div class="dash">
       <div  v-for="clips in ListaClips" :key="clips.id">        
         <video v-on:mouseover="mousehover(clips.id)" v-on:mouseleave="mouseleave"  class="vide" v-bind:controls="clips.id==numerito" ref="video" >
-            <source :src="'http://localhost/apiclips' + clips.clip" type="video/mp4">
+            <source :src="'http://localhost/clips' + clips.clip" type="video/mp4">
         </video>
       </div>
     </div>
