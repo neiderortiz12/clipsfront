@@ -63,6 +63,7 @@ export default {
             console.log(fr);
             axios.post('http://localhost:8000/api/clips/create', fr, {headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(res=>{
                 console.log(res);
+                 this.$router.push('dashboard');
             });
         }
     }

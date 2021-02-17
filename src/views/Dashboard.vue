@@ -4,7 +4,7 @@
                 <ul>
                     <li :class="{'is-active':activo == 'Profile'}"><a v-on:click.prevent="cambiarVista('Profile')">Perfil</a></li>
                     <li :class="{'is-active':activo == 'Elementos'}"><a v-on:click.prevent="cambiarVista('Elementos')">Mis Clips</a></li>
-                    <li :class="{'is-active':activo == 'Admin'}" v-if="user.rol==false"><a v-on:click.prevent="cambiarVista('Admin')">Administracion</a></li>
+                    <li :class="{'is-active':activo == 'Admin'}" v-if="user.rol"><a v-on:click.prevent="cambiarVista('Admin')">Administracion</a></li>
                 </ul>
             
                 
@@ -31,7 +31,7 @@ export default {
     setup(){
         const store = useStore()
         onMounted(() =>{
-            store.dispatch('subidosUsuario','1')
+            store.dispatch('subidosUsuario',localStorage.getItem('id'))
             store.dispatch('agregaruser')
             console.log("entron a mounted")
         })

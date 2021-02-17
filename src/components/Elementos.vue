@@ -1,35 +1,54 @@
 <template>
     <div class="contenedor">
-        <div class="contenedor-item" v-for="clips in ListaClips.clips" :key="clips.id">
-            <div class="contenedor-item-video">
-                <video v-on:mouseover="mousehover(clips.id)" v-on:mouseleave="mouseleave"  class="vide" v-bind:controls="clips.id==numerito" ref="video">
-                    <source :src="'http://localhost/apiclips' + clips.clip" type="video/mp4">
-                </video>
+        <div v-if="!ListaClips.clips[0]==[]">
+            hola
+            <div class="contenedor-item" v-for="(clips, index) in ListaDClips" :key="clips.id">
+                <div class="contenedor-item-video" v-if="clips">
+                    <video v-on:mouseover="mousehover(clips.id)" v-on:mouseleave="mouseleave"  class="vide" v-bind:controls="clips.id==numerito" ref="video">
+                        <source :src="'http://localhost/apiclips' + clips.clip" type="video/mp4">
+                    </video>
+                </div>
+                <div class="contenedor-item-opciones">
+                    <span class="tag is-primary" v-if="clips.confirmado">Habilitado</span>
+                    <span class="tag is-warning" v-else>No Habilitado </span>    
+                    <button class="button is-danger" v-on:click.prevent="deleteClip(clips.id,index)">Eliminar</button>
+                </div>
             </div>
-            <div class="contenedor-item-opciones">
-                <span class="tag is-primary" v-if="clips.confirmado">Habilitado</span>
-                <span class="tag is-warning" v-else>No Habilitado </span>    
-                <button class="button is-danger">Eliminar</button>
-            </div>
+        </div>
+        <div v-else>
+            <h3>no hay elemtos para mostrar</h3>
         </div>
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
+    
+    props:['ListaClips'],
     data(){
         return{
-            numerito:0
+            numerito:0,
+            ListaDClips:this.ListaClips.clips
         }
     },
-    props:['ListaClips'],
     methods: {
         mousehover: function(id){
         this.numerito=id;
-    },
+        },
         mouseleave: function(){
         this.numerito=0;
+        },
+        deleteClip(clip, index){
+
+            let direccion = "http://localhost:8000/api/clips/delete";
+            axios.post(direccion,{"id":clip},{headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(data =>{
+                console.log(data);
+                this.ListaDClips.splice(index,1)
+            });
         }
-    },
+     },
+
+
     
 }
 </script>
