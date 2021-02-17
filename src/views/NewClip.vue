@@ -6,21 +6,21 @@
         <div class="field">
             <form ction="" v-on:submit.prevent="createNewClip();"  enctype="multipart/form-data">
                 <div >
-                    <label for="" class="label" >Nombre</label>
+                    <label for="" class="label " >Nombre</label>
                     <div class="control">
-                        <input class="input" type="text" name="nombre" id="nombre" v-model="form.nombre" placeholder="Nombre del Nuevo Clip">
+                        <input class="input is-primary" type="text" name="nombre" id="nombre" v-model="form.nombre" placeholder="Nombre del Nuevo Clip" required>
                     </div>
                 </div>
                 <div >
                     <label for="" class="label" >Seleccione un Clip</label>
                     <div >
-                        <input class="input" type="file" @change="processFile($event)" >
+                        <input class="input is-primary" type="file" @change="processFile($event)" required>
                     </div>
                 </div>
                 <div >
                     <label for="" class="label" >Descripción</label>
                     <div class="control">
-                        <textarea class="input" name="descripcion" id="descripcion" v-model="form.descripcion" placeholder="Agregar Una Descripción"></textarea>
+                        <textarea class="input is-primary" name="descripcion" id="descripcion" v-model="form.descripcion" placeholder="Agregar Una Descripción" required></textarea>
                     </div>
                 </div>
                 <div >

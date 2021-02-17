@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h3>{{user.name}}</h3>
-        <h3>{{user.email}}</h3>
+        <h3><strong>Nombre de usuario :</strong>  {{user.name}}</h3>
+        <h3> <strong>E-mail :</strong>          {{user.email}}</h3>
     </div>
 </template>
 <script>

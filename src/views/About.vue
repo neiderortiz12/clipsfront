@@ -1,35 +1,34 @@
 <template>
     <div>
         <div class="about-section">
-            <h1>About Us Page</h1>
-            <p>Some text about who we are and what we do.</p>
-            <p>Resize the browser window to see that this page is responsive by the way.</p>
+            <h1>Clips</h1>
+            <p>En esta pagina encontraras todo tipo de videos para entretenerte y descargarlos cuando desees
+            </p>
+            
             </div>
 
-            <h2 style="text-align:center">Our Team</h2>
+            <h2 style="text-align:center">Nuestro Equipo</h2>
             <div class="row">
             <div class="column">
                 <div class="card">
-                <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
+                <img src="@/assets/neider.jpeg" alt="Jane" style="width:100%">
                 <div class="container">
-                    <h2>Jane Doe</h2>
-                    <p class="title">CEO & Founder</p>
-                    <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                    <p>jane@example.com</p>
-                    <p><button class="button">Contact</button></p>
+                    <h2>Neider Ortiz Luna</h2>
+                    <p class="title">Diseñador & desarrollador</p>
+                    <p>Estudiante y desarrollador de la Universidad de Nariño</p>
+                    <p>neiderfabi12@udenar.edu.co</p>
                 </div>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
-                <img src="/w3images/team2.jpg" alt="Mike" style="width:100%">
+                <img src="@/assets/fotoS.jpeg" alt="Mike" style="width:100%">
                 <div class="container">
-                    <h2>Mike Ross</h2>
-                    <p class="title">Art Director</p>
-                    <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                    <p>mike@example.com</p>
-                    <p><button class="button">Contact</button></p>
+                    <h2>Sergio Gómez Duque</h2>
+                    <p class="title">Diseñador & Desarrollador</p>
+                    <p>Estudiante y desarrollador de la Universidad de Nariño</p>
+                    <p>sergiogomdu@udenar.edu.co</p>
                 </div>
                 </div>
             </div>
@@ -53,6 +52,10 @@ html {
 .row{
     max-width: 600px;
     margin: auto;
+}
+img{
+  height: 250px;
+  object-fit: cover;
 }
 
 .column {

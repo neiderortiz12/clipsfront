@@ -1,5 +1,8 @@
 <template>
-    <div v-if="user">   
+    <div v-if="user"> 
+            <p class="panel-heading">
+            Mi Perfil
+            </p>
             <div class="tabs">
                 <ul>
                     <li :class="{'is-active':activo == 'Profile'}"><a v-on:click.prevent="cambiarVista('Profile')">Perfil</a></li>
@@ -12,12 +15,6 @@
             <div>
                     <component v-bind:is="componente" :user="user" :ListaClips="elementos"></component>
             </div>
-    <!--
-        es este es el dashboard
-        {{user}}
-        <Profile :user="user"/>
-        <Elementos :clips="elementos"/>
-    -->
     </div>
 </template>
 <script>

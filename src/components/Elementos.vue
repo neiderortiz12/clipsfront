@@ -1,7 +1,9 @@
 <template>
-    <div class="contenedor">
+    <div class="contenedor" v-if="ListaClips">
+        <p class="panel-heading">
+            Mis Clips
+        </p>
         <div v-if="!ListaClips.clips[0]==[]">
-            hola
             <div class="contenedor-item" v-for="(clips, index) in ListaDClips" :key="clips.id">
                 <div class="contenedor-item-video" v-if="clips">
                     <video v-on:mouseover="mousehover(clips.id)" v-on:mouseleave="mouseleave"  class="vide" v-bind:controls="clips.id==numerito" ref="video">
@@ -110,6 +112,43 @@ video {
     position: relative;
     overflow: hidden;
     box-shadow: 0 0 6px rgba(0, 0, 0, .6);
-}*/
+}
+
+
+
+import axios from 'axios'
+export default {
+    
+    props:['ListaClips'],
+    data(){
+        return{
+            numerito:0,
+            ListaDClips:this.ListaClips.clips
+        }
+    },
+    methods: {
+        mousehover: function(id){
+        this.numerito=id;
+        },
+        mouseleave: function(){
+        this.numerito=0;
+        },
+        deleteClip(clip, index){
+
+            let direccion = "http://localhost:8000/api/clips/delete";
+            axios.post(direccion,{"id":clip},{headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(data =>{
+                console.log(data);
+                this.ListaDClips.splice(index,1)
+            });
+        }
+     },
+
+
+    
+
+*/
 
 </style>
+
+
+
