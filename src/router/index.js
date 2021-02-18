@@ -5,6 +5,7 @@ import Register from '@/views/Register.vue'
 import NewClip from '@/views/NewClip.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import About from '@/views/About.vue'
+import Video from '@/views/Video.vue'
 const routes = [
   {
     path: '/',
@@ -35,6 +36,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/video',
+    name: 'Video',
+    component: Video
   }
 
     //component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')

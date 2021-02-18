@@ -33,7 +33,7 @@ import { ref } from 'vue';
 export default {
     setup(){
       let ListaClips=ref([]);
-      let direccion = "http://localhost:8000/api/clips";
+      let direccion = "http://localhost:8000/api/clipsadmin";
       axios.get(direccion,{headers:{Authorization:'Bearer '+localStorage.getItem('token')}}).then(data =>{
         console.log(data);
         ListaClips.value= data.data;
